@@ -1,0 +1,834 @@
+body2 {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    /* Full viewport height */
+    background: linear-gradient(to bottom, #003366, #003366, #003366, #003366);
+    background-attachment: fixed;
+    /* Creates a parallax effect */
+    background-size: cover;
+    /* Ensures the background covers the entire viewport */
+    color: #fff;
+    /* Default text color to stand out against the background */
+    font-family: Arial, sans-serif;
+    /* Preferred font */
+    scroll-behavior: smooth;
+    /* Enables smooth scrolling */
+}
+
+.social-media a {
+    margin-right: 10px;
+    font-size: 24px;
+    /* Adjust icon size */
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: #ffeb3b;
+    /* Optional hover effect */
+}
+
+
+.container2 {
+    position: relative;
+    z-index: 1;
+    /* Ensure content is above background */
+
+}
+
+/* Custom Leaflet Map Theme */
+.leaflet-container .leaflet-tile {
+    filter: hue-rotate(180deg) saturate(2) brightness(1.2) contrast(0.9);
+}
+
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+        /* Start slightly lower */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        /* End at original position */
+    }
+}
+
+/* Class to apply the fade-in effect */
+.fade-in {
+    opacity: 0;
+    /* Initial state */
+    animation: fadeIn 0.5s forwards;
+    /* Animation settings */
+}
+
+/* Topbar */
+.topbar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out;
+    padding: 15px 20px;
+    flex-wrap: wrap;
+    color: white;
+}
+
+.topbar .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 51, 102, 0.8);
+    /* Add semi-transparent background on scroll */
+    z-index: 100;
+}
+
+.landing-page.light {
+    background-color: #f5f5f5;
+    color: #000;
+}
+
+.landing-page.dark {
+    background-color: #003366;
+    color: #fff;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.header {
+    opacity: 0;
+}
+
+.topbar nav a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+/* Default Styles */
+.topbar .desktop-nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.topbar .mobile-menu-btn {
+    display: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .topbar .desktop-nav {
+        display: none;
+
+    }
+
+    .topbar nav a {
+        margin: 0 15px;
+        color: white;
+        text-decoration: none;
+        font-size: 1.1em;
+    }
+
+
+    .topbar .mobile-menu-btn {
+        display: block;
+    }
+
+    .mobile-nav-menu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        /* Adjust based on your topbar height */
+        right: 0;
+        background-color: #ffffff;
+        /* or theme color */
+        z-index: 1000;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        width: 200px;
+        /* Adjust as needed */
+    }
+
+    .mobile-nav-menu a {
+        padding: 0.5rem 1rem;
+        margin: 5px 0;
+        text-align: left;
+        border-radius: 4px;
+        color: #333;
+        /* Adjust for theme */
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .mobile-nav-menu a:hover {
+        background-color: #eee;
+        /* Adjust for theme */
+    }
+}
+
+.topbar .login-btn {
+    padding: 10px 20px;
+    background-color: #0066cc;
+    /* Blue */
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    /* Transition for smooth effect */
+}
+
+.logo {
+    transform: scale(3.1);
+    /* Scale the image to 1.5 times its original size */
+    transform-origin: left;
+    /* Keep scaling centered */
+    height: 20px;
+    /* Maintain original height for layout purposes */
+    width: auto;
+    /* Maintain aspect ratio */
+    background-color: rgba(50, 44, 96, 0.995);
+    border-radius: 3px;
+    border: -4px solid #172757;
+    padding: 0.2px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.topbar .login-btn:hover {
+    background-color: #0056a1;
+    /* Darker blue on hover */
+}
+
+.topbar .toggle-icon {
+    display: none;
+    /* Initially hidden for larger screens */
+    font-size: 1.5em;
+    color: #333;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.topbar .toggle-icon:hover {
+    color: #007bff;
+    /* Change color on hover */
+}
+
+/* Header */
+.header {
+    background-color: #003366;
+    /* Dark blue */
+    padding: 5px 5px;
+    /* Adjusted padding for a compact layout */
+    color: white;
+    display: flex;
+    /* Flexbox for side-by-side layout */
+    align-items: center;
+    margin-bottom: -100px;
+
+}
+
+.header-image {
+    max-width: 50%;
+    /* Adjust width of the image */
+    height: auto;
+    margin-right: 20px;
+    /* Space between image and text */
+    clip-path: xywh(0 5px 100% 75% round 15% 0);
+    /* Using clip-path to create a unique shape */
+}
+
+.header-text {
+    max-width: 50%;
+    /* Adjust text width */
+    text-align: left;
+    /* Align text to the left */
+    margin-top: -160px;
+    /* Adjust this value as needed to bring the text up */
+
+}
+
+.header h1 {
+    font-size: 3.2em;
+    /* Increased size for emphasis */
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 1.5em;
+    /* Increased size for emphasis */
+    margin-bottom: 10px;
+}
+
+.cta {
+    padding: 15px 40px;
+    background-color: #007bff;
+    /* Blue for CTA */
+    color: white;
+    font-size: 1.3em;
+    /* Increased size for emphasis */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    /* Transition for smooth effect */
+}
+
+.cta:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+}
+
+
+/* What We Do Section */
+.what-we-do {
+    background-color: #003366;
+    /* Updated to a soft blue */
+    margin: 0;
+    /* Removed margin for compactness */
+    text-align: center;
+    padding: 10px 20px;
+    /* Added padding for better spacing */
+}
+
+.what-we-do h2 {
+    font-size: 2.5em;
+    color: #fff;
+    /* Text color set to white */
+    margin-bottom: 20px;
+}
+
+.what-we-do p {
+    font-size: 1.5em;
+    color: #fff;
+    /* Text color set to white */
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Key Features Section */
+.features {
+    background-color: #003366;
+    /* Dark gray-blue background */
+    text-align: center;
+    color: #fff;
+    padding: 40px 20px;
+    /* Added padding for spacing */
+}
+
+.features-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* Center the card */
+    padding: 20px;
+    /* Inner padding */
+}
+
+.feature {
+    flex: 1 1 30%;
+    /* Flexbox to create 3 columns */
+    margin: 10px;
+    /* Space between features */
+    text-align: center;
+    /* Center align feature text */
+    background-color: #1E92AD;
+    /* Darker background for card */
+    border-radius: 10px;
+    /* Rounded corners */
+    padding: 20px;
+    /* Inner padding for cards */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow */
+    color: #fff;
+    /* Text color for feature card */
+}
+
+/* Icon styling */
+.feature-icon {
+    color: #003366;
+    /* Icon color */
+    margin-bottom: 10px;
+    /* Space between icon and text */
+}
+
+/* Subscription Plans Section */
+.plans {
+    background-color: #003366;
+    /* Dark gray-blue background */
+    text-align: center;
+    color: white;
+    padding: 40px 20px;
+    /* Added padding for spacing */
+}
+
+.plans-container {
+    display: flex;
+    justify-content: space-around;
+    /* Evenly space the plans */
+    margin: 20px 0;
+}
+
+.plan {
+    border: none;
+    /* Removed border */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    display: inline-block;
+    /* Display plans inline */
+    width: 250px;
+    /* Fixed width for uniformity */
+    background-color: #2c3e50;
+    /* Updated plan background color */
+    color: #fff;
+    /* Text color */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    transition: transform 0.3s;
+    /* Smooth scaling effect */
+    text-align: center;
+    /* Center the text */
+}
+
+.plan:hover {
+    transform: scale(1.05);
+    /* Slightly enlarge on hover */
+}
+
+.plan-cta {
+    background-color: #4a8bcf;
+    /* Default button color */
+    color: white;
+    /* Text color */
+    border: none;
+    /* Remove border */
+    border-radius: 5px;
+    /* Rounded corners */
+    padding: 10px 15px;
+    /* Padding */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.3s;
+    /* Smooth transitions */
+    margin-top: 10px;
+    /* Space between text and button */
+}
+
+.plan-cta:hover {
+    background-color: #3a6dbf;
+    /* Darker shade on hover */
+    transform: scale(1.05);
+    /* Slight enlargement on hover */
+}
+
+/* Testimonials Section */
+.testimonials {
+    background-color: #003366;
+    /* Dark gray-blue background */
+    text-align: center;
+    color: #fff;
+    padding: 40px 20px;
+    /* Added padding for spacing */
+}
+
+.testimonial-navigation {
+    display: flex;
+    /* Flexbox for navigation */
+    align-items: center;
+    /* Center vertically */
+    justify-content: center;
+    /* Center horizontally */
+}
+
+.testimonial-container {
+    display: flex;
+    justify-content: center;
+    /* Center testimonials */
+    align-items: center;
+    /* Center vertically */
+    margin: 0 20px;
+    /* Margin on sides */
+}
+
+.testimonial {
+    border: none;
+    /* Removed border */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    background-color: #1E92AD;
+    /* Updated testimonial background color */
+    color: #fff;
+    /* Text color */
+    max-width: 400px;
+    /* Max width for better readability */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+}
+
+.testimonial h4 {
+    margin-top: 10px;
+    /* Space between text and author */
+    font-weight: bold;
+}
+
+/* Scroll Buttons */
+.scroll-btn {
+    background: none;
+    border: none;
+    font-size: 2em;
+    /* Larger size for better visibility */
+    color: #007bff;
+    /* Button color */
+    cursor: pointer;
+    margin: 0 20px;
+    /* Space between buttons and testimonials */
+}
+
+.scroll-btn:disabled {
+    color: #ccc;
+    /* Color when disabled */
+}
+
+/* Footer */
+footer {
+    margin-top: 0px;
+    /* Reduced margin for a compact layout */
+    margin-bottom: 0px;
+    padding: 30px 20px;
+    /* Reduced padding for compactness */
+    background-color: #003366;
+    /* Dark blue */
+    color: white;
+    text-align: center;
+}
+
+footer h2 {
+    font-size: 2.5em;
+    /* Increased size for emphasis */
+}
+
+.footer-form {
+    margin-top: 20px;
+}
+
+.footer-form input,
+.footer-form button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.footer-form input {
+    width: 300px;
+    border: 1px solid #ccc;
+    /* Add a border for the input */
+}
+
+.footer-form button {
+    background-color: #007bff;
+    /* Blue for button */
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    /* Transition for smooth effect */
+}
+
+.footer-form button:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+}
+
+footer p {
+    margin-top: 30px;
+    font-size: 1.4em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+
+    /* Reduce text size and adjust spacing for medium screens */
+    .header h1 {
+        font-size: 2.5em;
+    }
+
+    .header p {
+        font-size: 1.1em;
+    }
+
+    .features-card,
+    .plans-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Adjust header layout for smaller screens */
+    .header {
+        /* flex-wrap: wrap;  */
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 0;
+        max-width: 100%;
+    }
+
+    .topbar {
+        flex-wrap: wrap;
+        text-align: start;
+    }
+
+    .topbar-nav {
+        display: flex;
+        flex-wrap: wrap;
+        /* flex-direction: column; */
+
+        align-items: center;
+        padding-left: -90%;
+        margin-left: -10%;
+        /* gap: 20%; */
+        justify-content: space-around;
+        text-align: start;
+        /* grid-template-columns: 1fr auto; */
+        gap: 1px;
+        /* justify-content: space-between; */
+    }
+
+    .header-image {
+        max-width: 100%;
+        margin-bottom: 40px;
+
+    }
+
+    .header-text {
+        /* max-width: 100%; */
+        margin-top: 0;
+        max-width: 100%;
+        margin-bottom: 25%;
+    }
+
+    /* Stack feature cards on smaller screens */
+    .feature {
+        flex: 1 1 45%;
+        /* Two columns */
+    }
+
+    .features-card {
+        flex-direction: column;
+    }
+
+    .testimonial-container {
+        flex-direction: column;
+        max-width: 100%;
+
+    }
+
+    /* Reduce padding for tighter layout */
+    .what-we-do,
+    .features,
+    .plans,
+    .testimonials {
+        padding: 20px 10px;
+    }
+
+    /* Adjust buttons for smaller screens */
+    .cta,
+    .plan-cta {
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Adjust for mobile devices */
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .header p {
+        font-size: 1em;
+    }
+
+    /* Stack features and plans vertically */
+    .feature,
+    .plan {
+        flex: 1 1 100%;
+        /* Full width */
+    }
+
+    /* Adjust padding for smaller devices */
+    .what-we-do,
+    .features,
+    .plans,
+    .testimonials {
+        padding: 15px 5px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    /* Reduce further for small mobile screens */
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    .header p {
+        font-size: 0.9em;
+    }
+
+    /* Reduce button sizes */
+    .cta,
+    .plan-cta {
+        font-size: 1em;
+        padding: 8px 15px;
+    }
+
+    /* Full-width footer inputs */
+    .footer-form input {
+        width: 100%;
+    }
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal Container */
+.modal {
+    background-color: #003366;
+    /* Dark blue background */
+    padding: 30px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    /* Soft shadow */
+    color: white;
+    text-align: center;
+}
+
+.modal h2 {
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-size: 24px;
+}
+
+/* Form Styles */
+.trial-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.trial-form label {
+    text-align: left;
+    color: #e7f3fe;
+    /* Soft white */
+    margin-bottom: 8px;
+}
+
+.trial-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #003366;
+    /* Dark blue text */
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    /* Slight shadow */
+}
+
+.trial-form input::placeholder {
+    color: #666;
+}
+
+/* Submit Button */
+.submit-btn {
+    padding: 12px 20px;
+    background-color: #4a8bcf;
+    /* Lighter blue */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #376a9d;
+    /* Darker on hover */
+}
+
+/* Close Button */
+.close-btn {
+    padding: 10px 20px;
+    background-color: #cfcfcf;
+    color: #003366;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+    background-color: #a3a3a3;
+    /* Slight hover effect */
+}
+
+/* Modal animation */
+.modal {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
