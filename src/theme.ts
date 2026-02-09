@@ -1,101 +1,146 @@
-import { createContext, useState, useMemo } from "react";
-import { createTheme, ThemeOptions } from "@mui/material/styles";
+// src/theme.ts
+import { createTheme, ThemeOptions } from '@mui/material/styles';
+import { PaletteMode } from '@mui/material';
+import { createContext, useMemo, useState } from 'react';
 
-// MUI theme settings
-export const themeSettings = (mode: "dark" | "light"): ThemeOptions => {
-    return {
-        palette: {
-            mode: mode,
+// Color design tokens (customize as needed)
+export const tokens = (mode: PaletteMode) => ({
+  ...(mode === 'dark'
+    ? {
+        // Dark mode colors
+        primary: {
+          main: '#90CAF9', // Light Blue
+          light: '#E3F2FD',
+          dark: '#42A5F5',
+        },
+        secondary: {
+          main: '#CE93D8', // Light Purple
+          light: '#F3E5F5',
+          dark: '#AB47BC',
+        },
+        background: {
+          default: '#121212',
+          paper: '#1E1E1E',
+        },
+        text: {
+          primary: '#FFFFFF',
+          secondary: '#B0B0B0',
+        },
+      }
+    : {
+        // Light mode colors
+        primary: {
+          main: '#1976D2', // Blue
+          light: '#BBDEFB',
+          dark: '#0D47A1',
+        },
+        secondary: {
+          main: '#8E24AA', // Purple
+          light: '#E1BEE7',
+          dark: '#4A148C',
+        },
+        background: {
+          default: '#F5F7FA',
+          paper: '#FFFFFF',
+        },
+        text: {
+          primary: '#212121',
+          secondary: '#757575',
+        },
+      }),
+});
+
+// Function to create the theme
+export const themeSettings = (mode: PaletteMode): ThemeOptions => {
+  const colors = tokens(mode);
+
+  return {
+    palette: {
+      mode: mode,
+      ...(mode === 'dark'
+        ? {
+            // palette values for dark mode
             primary: {
-                main: "hsl(142.1, 76.2%, 36.3%)", // Primary Green from Tailwind
-                contrastText: "#fff",
+              main: colors.primary.main,
             },
             secondary: {
-                main: "hsl(142.1, 70.6%, 45.3%)",
+              main: colors.secondary.main,
             },
             background: {
-                default: mode === "dark" ? "hsl(222.2, 84%, 4.9%)" : "hsl(210, 20%, 98%)",
-                paper: mode === "dark" ? "hsl(222.2, 84%, 4.9%)" : "#ffffff",
+              default: colors.background.default,
+              paper: colors.background.paper,
             },
             text: {
-                primary: mode === "dark" ? "hsl(210, 40%, 98%)" : "hsl(224, 71.4%, 4.1%)",
-                secondary: mode === "dark" ? "hsl(215, 20.2%, 65.1%)" : "hsl(215.4, 16.3%, 46.9%)",
+              primary: colors.text.primary,
+              secondary: colors.text.secondary,
             },
-            divider: mode === "dark" ? "hsl(217.2, 32.6%, 17.5%)" : "hsl(214.3, 31.8%, 91.4%)",
-        },
-        typography: {
-            fontFamily: ["Inter", "sans-serif"].join(","),
-            fontSize: 14,
-            h1: {
-                fontFamily: ["Inter", "sans-serif"].join(","),
-                fontSize: 40,
-                fontWeight: 700,
+          }
+        : {
+            // palette values for light mode
+            primary: {
+              main: colors.primary.main,
             },
-            h2: {
-                fontFamily: ["Inter", "sans-serif"].join(","),
-                fontSize: 32,
-                fontWeight: 700,
+            secondary: {
+              main: colors.secondary.main,
             },
-            h3: {
-                fontFamily: ["Inter", "sans-serif"].join(","),
-                fontSize: 24,
-                fontWeight: 600,
+            background: {
+              default: colors.background.default,
+              paper: colors.background.paper,
             },
-            h4: {
-                fontFamily: ["Inter", "sans-serif"].join(","),
-                fontSize: 20,
-                fontWeight: 600,
+            text: {
+              primary: colors.text.primary,
+              secondary: colors.text.secondary,
             },
-            h5: {
-                fontFamily: ["Inter", "sans-serif"].join(","),
-                fontSize: 16,
-                fontWeight: 500,
-            },
-            h6: {
-                fontFamily: ["Inter", "sans-serif"].join(","),
-                fontSize: 14,
-                fontWeight: 500,
-            },
-        },
-        components: {
-            MuiButton: {
-                styleOverrides: {
-                    root: {
-                        textTransform: "none",
-                        borderRadius: "8px",
-                        fontWeight: 600,
-                    },
-                },
-            },
-            MuiPaper: {
-                styleOverrides: {
-                    root: {
-                        backgroundImage: "none",
-                        borderRadius: "12px",
-                    },
+          }),
+    },
+    typography: {
+      fontFamily: ['Roboto', 'sans-serif'].join(','),
+      fontSize: 12,
+      h1: { fontSize: 40 },
+      h2: { fontSize: 32 },
+      h3: { fontSize: 24 },
+      h4: { fontSize: 20 },
+      h5: { fontSize: 16 },
+      h6: { fontSize: 14 },
+    },
+    components: {
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    textTransform: 'none',
                 },
             },
         },
-    };
+        MuiAppBar: {
+            styleOverrides: {
+                root: {
+                    boxShadow: 'none',
+                },
+            },
+        },
+        // TODO: Add more component specific overrides here
+    },
+  };
 };
 
-// Context for color mode
+// context for color mode
 export const ColorModeContext = createContext({
-    toggleColorMode: () => { },
+  toggleColorMode: () => {},
+  mode: 'light' as PaletteMode,
 });
 
 export const useMode = () => {
-    const [mode, setMode] = useState<"dark" | "light">("light");
+  const [mode, setMode] = useState<PaletteMode>('light');
 
-    const colorMode = useMemo(
-        () => ({
-            toggleColorMode: () =>
-                setMode((prev) => (prev === "light" ? "dark" : "light")),
-        }),
-        []
-    );
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: () =>
+        setMode((prev) => (prev === 'light' ? 'dark' : 'light')),
+      mode,
+    }),
+    [mode]
+  );
 
-    const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
-    return [theme, colorMode] as const;
+  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  return [theme, colorMode] as const;
 };
-

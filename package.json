@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@apollo/client": "^4.0.11",
+    "@casl/ability": "^6.7.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.6",
@@ -22,6 +23,7 @@
     "@nivo/line": "^0.99.0",
     "@nivo/pie": "^0.99.0",
     "@reduxjs/toolkit": "^2.11.2",
+    "@tailwindcss/postcss": "^4.1.18",
     "@types/jspdf": "^2.0.0",
     "axios": "^1.13.2",
     "chart.js": "^4.5.1",
@@ -41,6 +43,7 @@
     "react-pro-sidebar": "^1.1.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.11.0",
+    "react-to-print": "^3.2.0",
     "recharts": "^3.6.0",
     "sweetalert2": "^11.26.17",
     "yup": "^1.7.1"

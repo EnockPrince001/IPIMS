@@ -1,126 +1,178 @@
-import React, { useState, useEffect } from "react";
-import { Routes, Route, useNavigate, useLocation, Navigate } from "react-router-dom";
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { ColorModeContext, useMode } from "./theme";
-import { ApolloProvider } from "@apollo/client";
+// src/App.tsx
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { RootState } from './store';
+import { useMode, ColorModeContext } from './theme';
+import { ApolloProvider } from '@apollo/client';
+import { userManagementClient, roleManagementClient, inventoryClient, salesClient, patientClient, prescriptionClient, setupClient } from './config';
+import { AbilityContext } from './data/RBAC/ability';
+import { useAuth } from './hooks/useAuth';
 
-// Apollo Clients
-import {
-  createRoleClient,
-  createSetupClient,
-  createUsersClient,
-} from "./config";
+// HOC for authenticated layout
+import withAuthLayout from './components/hoc/withAuthLayout';
 
-// Components & Scenes
-import LandingPage from "./pages/Global/LandingPage";
-import Dashboard from "./pages/Dashboard";
-import Inventory from "./pages/InventoryManagement";
-import Sales from "./pages/SalesManagement";
-import Customers from "./pages/CustomerManagement";
-import Finance from "./pages/FinanceManagement";
-import Users from "./pages/UserManagement";
-import Reports from "./pages/ReportsManagement";
-import Setup from "./pages/SetupManagement";
-import withLayout from "./components/HOCApp";
+// Public Scenes
+import LoginPage from './scenes/Auth/LoginPage';
 
-// Authentication Placeholder
-const SignInSide = ({ onLogin }: { onLogin: () => void }) => (
-  <div className="flex items-center justify-center min-h-screen bg-background">
-    <div className="p-8 space-y-4 rounded-lg shadow-lg bg-card border border-border w-96">
-      <div className="flex justify-center mb-4">
-        <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">IP</div>
-      </div>
-      <h1 className="text-2xl font-bold text-center text-foreground tracking-tight">IPIMS Login</h1>
-      <p className="text-muted-foreground text-center text-sm">Intelligent Pharmacy Inventory System</p>
-      <div className="space-y-4 pt-4">
-        <button
-          className="w-full py-2.5 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all font-semibold shadow-md active:scale-[0.98]"
-          onClick={() => { localStorage.setItem("token", "mock-token"); onLogin(); }}
-        >
-          Enter Dashboard
-        </button>
-      </div>
-    </div>
-  </div>
-);
+// Authenticated Scenes
+import Dashboard from './scenes/Dashboard/Overview';
+import DispensePOS from './scenes/POS/Dispense';
+import ProductsTable from './scenes/InventoryManagement/ProductsTable';
+import PatientsTable from './scenes/PatientManagement/PatientsTable';
+import PendingPrescriptions from './scenes/PrescriptionManagement/PendingPrescriptions';
+import SalesTransactions from './scenes/POS/Transactions';
+import UsersTable from './scenes/UserManagement/UsersTable';
+import RolesTable from './scenes/RoleManagement/RolesTable';
+import SalesReports from './scenes/Reporting/SalesReports';
+import PharmacyDetails from './scenes/SetupManagement/PharmacyDetails';
 
-const ProfilePage = () => <div className="p-4"><h1>User Profile</h1><p>Profile Details</p></div>;
-
-function App() {
+// A component to manage Apollo Providers based on routes
+const AppProviders: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { isAuthenticated, loading: authLoading, checkAuthStatus } = useAuth();
+  const { ability } = useSelector((state: RootState) => state.roles);
   const [theme, colorMode] = useMode();
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("token"));
-  const navigate = useNavigate();
-  const location = useLocation();
 
-  const userClient = createUsersClient();
-
-  // Basic Auth Sync
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token);
-  }, [location.pathname]);
+    // Check auth status on mount and potentially periodically
+    checkAuthStatus();
+    // TODO: Implement inactivity timer if needed
+  }, [checkAuthStatus]);
 
-  const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-    if (!isAuthenticated) return <Navigate to="/signin" replace />;
-    return <>{children}</>;
-  };
+  if (authLoading) {
+    // TODO: Render a global loading spinner
+    return <div>Loading Application...</div>;
+  }
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/signin" element={<SignInSide onLogin={() => { setIsAuthenticated(true); navigate("/super-admin-dashboard"); }} />} />
+        <AbilityContext.Provider value={ability}>
+          <Router>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/signin" element={<LoginPage />} />
+              <Route path="/" element={<Navigate to="/dashboard" replace />} /> {/* Redirect to dashboard if authenticated */}
 
-          {/* Protected Routes Wrapper */}
-          <Route path="/*" element={
-            <ProtectedRoute>
-              <Routes>
-                <Route path="/super-admin-dashboard" element={withLayout(Dashboard)({})} />
+              {/* Protected Routes - ApolloProvider for each microservice */}
+              {isAuthenticated ? (
+                <>
+                  {/* User Management Module */}
+                  <Route
+                    path="/*" // Catch all authenticated routes for user management
+                    element={
+                      <ApolloProvider client={userManagementClient}>
+                        <Routes>
+                          <Route path="/users" element={withAuthLayout(UsersTable)()} />
+                          {/* TODO: Add more user management routes */}
+                        </Routes>
+                      </ApolloProvider>
+                    }
+                  />
 
-                {/* 1. Inventory Management */}
-                <Route path="/product" element={withLayout(Inventory)({})} />
-                <Route path="/expired-products" element={withLayout(Inventory)({})} />
+                  {/* Role Management Module */}
+                  <Route
+                    path="/*" // Catch all authenticated routes for role management
+                    element={
+                      <ApolloProvider client={roleManagementClient}>
+                        <Routes>
+                          <Route path="/roles" element={withAuthLayout(RolesTable)()} />
+                          {/* TODO: Add more role management routes like /permissions, /audits */}
+                        </Routes>
+                      </ApolloProvider>
+                    }
+                  />
 
-                {/* 3. Sales Management */}
-                <Route path="/pos" element={withLayout(Sales)({})} />
-                <Route path="/pos-salesorders" element={withLayout(Sales)({})} />
+                  {/* Inventory Management Module */}
+                  <Route
+                    path="/*"
+                    element={
+                      <ApolloProvider client={inventoryClient}>
+                        <Routes>
+                          <Route path="/inventory/products" element={withAuthLayout(ProductsTable)()} />
+                          {/* TODO: Add more inventory routes */}
+                        </Routes>
+                      </ApolloProvider>
+                    }
+                  />
 
-                {/* 4. Customer Management */}
-                <Route path="/customers" element={withLayout(Customers)({})} />
+                  {/* Sales & POS Module */}
+                  <Route
+                    path="/*"
+                    element={
+                      <ApolloProvider client={salesClient}>
+                        <Routes>
+                          <Route path="/pos/dispense" element={withAuthLayout(DispensePOS)()} />
+                          <Route path="/pos/transactions" element={withAuthLayout(SalesTransactions)()} />
+                          {/* TODO: Add more POS/Sales routes */}
+                        </Routes>
+                      </ApolloProvider>
+                    }
+                  />
 
-                {/* 5. Accounts and Finance */}
-                <Route path="/chart-of-accounts" element={withLayout(Finance)({})} />
-                <Route path="/accounts-setups" element={withLayout(Finance)({})} />
+                  {/* Patient Management Module */}
+                  <Route
+                    path="/*"
+                    element={
+                      <ApolloProvider client={patientClient}>
+                        <Routes>
+                          <Route path="/patients" element={withAuthLayout(PatientsTable)()} />
+                          {/* TODO: Add more patient management routes */}
+                        </Routes>
+                      </ApolloProvider>
+                    }
+                  />
 
-                {/* 6. User Management */}
-                <Route path="/users" element={withLayout(Users)({})} />
+                  {/* Prescription Management Module */}
+                  <Route
+                    path="/*"
+                    element={
+                      <ApolloProvider client={prescriptionClient}>
+                        <Routes>
+                          <Route path="/prescriptions/pending" element={withAuthLayout(PendingPrescriptions)()} />
+                          {/* TODO: Add more prescription routes */}
+                        </Routes>
+                      </ApolloProvider>
+                    }
+                  />
 
-                {/* 7. Reports Management */}
-                <Route path="/report-browser" element={withLayout(Reports)({})} />
-                <Route path="/reports-major-classification" element={withLayout(Reports)({})} />
+                  {/* Setup Management Module */}
+                  <Route
+                    path="/*"
+                    element={
+                      <ApolloProvider client={setupClient}>
+                        <Routes>
+                          <Route path="/setup/pharmacy-details" element={withAuthLayout(PharmacyDetails)()} />
+                          {/* TODO: Add more setup routes */}
+                        </Routes>
+                      </ApolloProvider>
+                    }
+                  />
 
-                {/* 8. Role Management */}
-                <Route path="/role" element={withLayout(Users)({})} />
-                <Route path="/rights" element={withLayout(Users)({})} />
+                  {/* General Application Routes (can use any client if shared or fetch locally) */}
+                  <Route path="/dashboard" element={withAuthLayout(Dashboard)()} />
+                  <Route path="/reports/sales" element={withAuthLayout(SalesReports)()} />
+                  {/* TODO: Add other general routes */}
 
-                {/* 9. Setup & 10. Company */}
-                <Route path="/pos-setups" element={withLayout(Setup)({})} />
-                <Route path="/manage-companies" element={withLayout(Setup)({})} />
-
-                <Route path="/profile" element={withLayout(ProfilePage)({})} />
-
-                {/* Fallback */}
-                <Route path="*" element={<Navigate to="/super-admin-dashboard" replace />} />
-              </Routes>
-            </ProtectedRoute>
-          } />
-        </Routes>
+                  {/* Fallback for authenticated users */}
+                  <Route path="*" element={<Navigate to="/dashboard" replace />} />
+                </>
+              ) : (
+                // Redirect unauthenticated users to login for any protected route
+                <Route path="*" element={<Navigate to="/signin" replace />} />
+              )}
+            </Routes>
+          </Router>
+        </AbilityContext.Provider>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
+};
+
+function App() {
+  return <AppProviders />;
 }
 
 export default App;
