@@ -27,7 +27,7 @@ const GET_PHARMACY_CONFIG_QUERY = gql`
       contactPhone
       taxRate
       defaultCurrency
-      // TODO: Add other config fields
+      # TODO: Add other config fields
     }
   }
 `;

@@ -14,7 +14,7 @@ const GET_PATIENTS_QUERY = gql`
       lastName
       contactNumber
       dateOfBirth
-      // TODO: Add all fields you need
+      # TODO: Add all fields you need
     }
   }
 `;
@@ -25,7 +25,7 @@ const CREATE_PATIENT_MUTATION = gql`
       id
       firstName
       lastName
-      // TODO: Add all fields you expect to get back
+      # TODO: Add all fields you expect to get back
     }
   }
 `;

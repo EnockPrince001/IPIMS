@@ -19,7 +19,7 @@ const GET_PHARMACY_PRODUCTS_QUERY = gql`
       unitPrice
       stockLevel
       isPrescriptionRequired
-      // TODO: Add all fields you need
+      # TODO: Add all fields you need
     }
   }
 `;
@@ -29,7 +29,7 @@ const CREATE_PHARMACY_PRODUCT_MUTATION = gql`
     createPharmacyProduct(input: $input) {
       id
       name
-      // TODO: Add all fields you expect to get back
+      # TODO: Add all fields you expect to get back
     }
   }
 `;

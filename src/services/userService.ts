@@ -15,7 +15,7 @@ const GET_USERS_QUERY = gql`
       email
       roleId
       roleName
-      // TODO: Add all fields you need
+      # TODO: Add all fields you need
     }
   }
 `;
@@ -26,7 +26,7 @@ const GET_ROLES_QUERY = gql`
       id
       name
       description
-      // TODO: Add permission details if roles contain them directly
+      # TODO: Add permission details if roles contain them directly
     }
   }
 `;

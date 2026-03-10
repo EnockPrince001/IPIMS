@@ -24,7 +24,7 @@ const GET_PRESCRIPTIONS_QUERY = gql`
         instructions
         isDispensed
       }
-      // TODO: Add all fields you need
+      # TODO: Add all fields you need
     }
   }
 `;
@@ -38,7 +38,7 @@ const DISPENSE_PRESCRIPTION_MUTATION = gql`
         drugId
         isDispensed
       }
-      // TODO: Add all fields you expect to get back
+      # TODO: Add all fields you expect to get back
     }
   }
 `;

@@ -16,7 +16,7 @@ const GET_SALE_ORDERS_QUERY = gql`
       totalAmount
       paymentStatus
       cashierId
-      // TODO: Add all fields you need
+      # TODO: Add all fields you need
     }
   }
 `;
@@ -26,7 +26,7 @@ const CREATE_SALE_ORDER_MUTATION = gql`
     createSaleOrder(input: $input) {
       id
       totalAmount
-      // TODO: Add all fields you expect to get back
+      # TODO: Add all fields you expect to get back
     }
   }
 `;
