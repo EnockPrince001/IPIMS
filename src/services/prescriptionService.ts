@@ -3,7 +3,7 @@
 
 import { prescriptionClient } from '../config';
 import { gql } from '@apollo/client';
-import { IPrescription } from '../data/models';
+import type { IPrescription } from '../data/models';
 
 // TODO: Define your GraphQL queries and mutations for prescriptions
 const GET_PRESCRIPTIONS_QUERY = gql`
@@ -47,7 +47,7 @@ class PrescriptionService {
   public async getPrescriptions(status?: string): Promise<IPrescription[]> {
     // TODO: Implement fetching logic
     try {
-      const { data } = await prescriptionClient.query({
+      const { data } = await prescriptionClient.query<any>({
         query: GET_PRESCRIPTIONS_QUERY,
         variables: { status },
         fetchPolicy: 'network-only',
@@ -65,7 +65,7 @@ class PrescriptionService {
   ): Promise<IPrescription> {
     // TODO: Implement dispensing logic
     try {
-      const { data } = await prescriptionClient.mutate({
+      const { data } = await prescriptionClient.mutate<any>({
         mutation: DISPENSE_PRESCRIPTION_MUTATION,
         variables: { id: prescriptionId, dispensedItems },
       });

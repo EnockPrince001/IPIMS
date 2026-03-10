@@ -1,7 +1,8 @@
 // src/store/reducers/pharmacyConfigReducer.ts
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
-interface PharmacyConfigState {
+export interface PharmacyConfigState {
   pharmacyName: string;
   address: string;
   contactEmail: string;

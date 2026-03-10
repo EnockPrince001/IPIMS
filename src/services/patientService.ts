@@ -3,7 +3,7 @@
 
 import { patientClient } from '../config';
 import { gql } from '@apollo/client';
-import { IPatient } from '../data/models';
+import type { IPatient } from '../data/models';
 
 // TODO: Define your GraphQL queries and mutations for patients
 const GET_PATIENTS_QUERY = gql`
@@ -34,7 +34,7 @@ class PatientService {
   public async getPatients(): Promise<IPatient[]> {
     // TODO: Implement fetching logic
     try {
-      const { data } = await patientClient.query({
+      const { data } = await patientClient.query<any>({
         query: GET_PATIENTS_QUERY,
         fetchPolicy: 'network-only',
       });
@@ -48,7 +48,7 @@ class PatientService {
   public async createPatient(patient: Partial<IPatient>): Promise<IPatient> {
     // TODO: Implement creation logic
     try {
-      const { data } = await patientClient.mutate({
+      const { data } = await patientClient.mutate<any>({
         mutation: CREATE_PATIENT_MUTATION,
         variables: { input: patient },
       });

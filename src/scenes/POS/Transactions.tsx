@@ -2,9 +2,9 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import GenericDataGrid from '../../components/common/GenericDataGrid';
-import { ISaleOrder } from '../../data/models';
+import type { ISaleOrder } from '../../data/models';
 import { salesService } from '../../services';
-import { GridColDef } from '@mui/x-data-grid';
+import type { GridColDef } from '@mui/x-data-grid';
 
 const SalesTransactions: React.FC = () => {
   const [transactions, setTransactions] = React.useState<ISaleOrder[]>([]);

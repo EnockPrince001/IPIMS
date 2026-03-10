@@ -3,7 +3,8 @@
 
 import { userManagementClient } from '../config';
 import { gql } from '@apollo/client';
-import { IUser, IRole } from '../data/models';
+import type { IUser } from '../data/models';
+import type { IRole } from '../data/models';
 
 // TODO: Define your GraphQL queries and mutations for users and roles
 const GET_USERS_QUERY = gql`
@@ -34,7 +35,7 @@ class UserService {
   public async getUsers(): Promise<IUser[]> {
     // TODO: Implement fetching logic
     try {
-      const { data } = await userManagementClient.query({
+      const { data } = await userManagementClient.query<any>({
         query: GET_USERS_QUERY,
         fetchPolicy: 'network-only',
       });
@@ -48,7 +49,7 @@ class UserService {
   public async getRoles(): Promise<IRole[]> {
     // TODO: Implement fetching logic
     try {
-      const { data } = await userManagementClient.query({
+      const { data } = await userManagementClient.query<any>({
         query: GET_ROLES_QUERY,
         fetchPolicy: 'network-only',
       });

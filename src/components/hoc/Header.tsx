@@ -9,7 +9,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useProSidebar } from 'react-pro-sidebar'; // Assuming react-pro-sidebar is used for the sidebar
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../store';
+import type { AppDispatch } from '../../store';
+import type { RootState } from '../../store';
 import { toggleDarkMode } from '../../store/reducers/uiReducer';
 import { ColorModeContext } from '../../theme';
 

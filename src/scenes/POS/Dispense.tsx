@@ -2,7 +2,9 @@
 import React, { useState, useMemo } from 'react';
 import { Box, Typography, Grid, Paper, List, ListItem, ListItemText, ListItemButton, TextField, Autocomplete, Button } from '@mui/material';
 import DrugSearchInput from '../../components/pharmacy/DrugSearchInput';
-import { IPharmacyProduct, IPatient, ISaleOrderItem } from '../../data/models';
+import type { IPharmacyProduct } from '../../data/models';
+import type { IPatient } from '../../data/models';
+import type { ISaleOrderItem } from '../../data/models';
 import { mockProducts, mockPatients } from '../../data/mockData';
 import DispensingItemRow from '../../components/pharmacy/DispensingItemRow';
 import PaymentModal from './PaymentModal';
@@ -92,7 +94,7 @@ const DispensePOS: React.FC = () => {
   const removeFromCart = (productId: string) => {
     setCart(prevCart => prevCart.filter(item => item.productId !== productId));
   };
-  
+
   const clearCart = () => {
     setCart([]);
     setSelectedPatient(null);
@@ -106,7 +108,7 @@ const DispensePOS: React.FC = () => {
       payment: paymentDetails,
     };
     setCompletedSaleDetails(saleData);
-    
+
     clearCart();
     setIsReceiptModalOpen(true);
     await new Promise(resolve => setTimeout(resolve, 500));
@@ -120,7 +122,7 @@ const DispensePOS: React.FC = () => {
 
       <Grid container spacing={{ xs: 2, md: 3 }}>
         {/* Left Column */}
-        <Grid item xs={12} md={4} lg={3}>
+        <Grid size={{ xs: 12, md: 4, lg: 3 }}>
           <Paper sx={{ p: 2, height: '100%', display: 'flex', flexDirection: 'column' }}>
             <Typography variant="h6" gutterBottom>Patient</Typography>
             <Autocomplete
@@ -132,7 +134,7 @@ const DispensePOS: React.FC = () => {
             />
             {selectedPatient && (
               <Box mt={2}>
-                 <Typography variant="body1">Selected: <strong>{selectedPatient.firstName} {selectedPatient.lastName}</strong></Typography>
+                <Typography variant="body1">Selected: <strong>{selectedPatient.firstName} {selectedPatient.lastName}</strong></Typography>
               </Box>
             )}
 
@@ -141,7 +143,7 @@ const DispensePOS: React.FC = () => {
             <List sx={{ height: '50vh', overflowY: 'auto', mt: 2 }}>
               {filteredProducts.map(p => (
                 <ListItemButton key={p.id} onClick={() => addToCart(p)} disabled={p.stockLevel === 0}>
-                  <ListItemText 
+                  <ListItemText
                     primary={p.name}
                     secondary={`KSh ${p.unitPrice.toFixed(2)} | Stock: ${p.stockLevel}`}
                     secondaryTypographyProps={{ color: p.stockLevel === 0 ? 'error' : 'text.secondary' }}
@@ -153,17 +155,17 @@ const DispensePOS: React.FC = () => {
         </Grid>
 
         {/* Middle Column */}
-        <Grid item xs={12} md={5} lg={6}>
+        <Grid size={{ xs: 12, md: 5, lg: 6 }}>
           <Paper sx={{ p: 2, height: '100%' }}>
             <Typography variant="h6" gutterBottom>Dispensing Cart</Typography>
             <Box sx={{ height: '70vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 1 }}>
               {cart.length > 0 ? (
                 cart.map(item => (
-                  <DispensingItemRow 
+                  <DispensingItemRow
                     key={item.id}
                     item={{ product: allProducts.find(p => p.id === item.productId)!, quantity: item.quantity }}
-                    onQuantityChange={updateQuantity} 
-                    onRemove={removeFromCart} 
+                    onQuantityChange={updateQuantity}
+                    onRemove={removeFromCart}
                   />
                 ))
               ) : (
@@ -176,7 +178,7 @@ const DispensePOS: React.FC = () => {
         </Grid>
 
         {/* Right Column */}
-        <Grid item xs={12} md={3} lg={3}>
+        <Grid size={{ xs: 12, md: 3, lg: 3 }}>
           <Paper sx={{ p: 2, height: '100%' }}>
             <Typography variant="h6" gutterBottom>Sale Summary</Typography>
             <Box>
@@ -193,7 +195,7 @@ const DispensePOS: React.FC = () => {
                 <Typography variant="h5" fontWeight="bold">KSh {grandTotal.toFixed(2)}</Typography>
               </Box>
             </Box>
-            
+
             <Box sx={{ mt: 3, display: 'flex', flexDirection: 'column', gap: 2 }}>
               <PermissionGuard action="create" subject="SaleOrder">
                 <Button variant="contained" color="primary" disabled={cart.length === 0} onClick={() => setIsPaymentModalOpen(true)}>
@@ -206,15 +208,15 @@ const DispensePOS: React.FC = () => {
           </Paper>
         </Grid>
       </Grid>
-      
-      <PaymentModal 
+
+      <PaymentModal
         open={isPaymentModalOpen}
         onClose={() => setIsPaymentModalOpen(false)}
         totalAmount={grandTotal}
         onConfirm={handleConfirmPayment}
       />
 
-      <ReceiptModal 
+      <ReceiptModal
         open={isReceiptModalOpen}
         onClose={() => setIsReceiptModalOpen(false)}
         saleDetails={completedSaleDetails}

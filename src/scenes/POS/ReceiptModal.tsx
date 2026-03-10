@@ -2,7 +2,8 @@
 import React, { useRef } from 'react';
 import { Box, Typography, Button, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import ModalWrapper from '../../components/common/ModalWrapper';
-import { ISaleOrderItem, IPatient } from '../../data/models';
+import type { ISaleOrderItem } from '../../data/models';
+import type { IPatient } from '../../data/models';
 import { useReactToPrint } from 'react-to-print';
 import PrintIcon from '@mui/icons-material/Print';
 import { APP_NAME } from '../../config';
@@ -29,7 +30,7 @@ const ReceiptModal: React.FC<ReceiptModalProps> = ({ open, onClose, saleDetails 
   const componentRef = useRef(null);
   
   const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
+    contentRef: componentRef,
   });
 
   if (!saleDetails) {

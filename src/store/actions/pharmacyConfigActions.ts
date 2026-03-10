@@ -1,6 +1,6 @@
 // src/store/actions/pharmacyConfigActions.ts
 import { createAction } from '@reduxjs/toolkit';
-import { PharmacyConfigState } from '../reducers/pharmacyConfigReducer'; // Import type
+import type { PharmacyConfigState } from '../reducers/pharmacyConfigReducer'; // Import type
 
 export const fetchPharmacyConfigStart = createAction('pharmacyConfig/fetchPharmacyConfigStart');
 export const fetchPharmacyConfigSuccess = createAction<PharmacyConfigState>('pharmacyConfig/fetchPharmacyConfigSuccess');

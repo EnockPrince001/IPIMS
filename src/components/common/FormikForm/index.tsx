@@ -1,6 +1,7 @@
 // src/components/common/FormikForm/index.tsx
 import React from 'react';
-import { Formik, Form, FormikHelpers } from 'formik';
+import type { FormikHelpers } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Box, Button, CircularProgress } from '@mui/material';
 

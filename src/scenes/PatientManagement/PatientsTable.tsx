@@ -1,9 +1,9 @@
 // src/scenes/PatientManagement/PatientsTable.tsx
 import React, { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
-import { GridColDef } from '@mui/x-data-grid';
+import type { GridColDef } from '@mui/x-data-grid';
 import GenericDataGrid from '../../components/common/GenericDataGrid';
-import { IPatient } from '../../data/models';
+import type { IPatient } from '../../data/models';
 import { patientService } from '../../services';
 import PatientForm from './PatientForm'; // Assuming a form for patients
 

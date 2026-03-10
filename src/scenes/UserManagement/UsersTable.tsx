@@ -1,9 +1,9 @@
 // src/scenes/UserManagement/UsersTable.tsx
 import React, { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
-import { GridColDef } from '@mui/x-data-grid';
+import type { GridColDef } from '@mui/x-data-grid';
 import GenericDataGrid from '../../components/common/GenericDataGrid';
-import { IUser } from '../../data/models';
+import type { IUser } from '../../data/models';
 import { userService } from '../../services';
 import UserForm from './UserForm'; // Assuming a form for users
 

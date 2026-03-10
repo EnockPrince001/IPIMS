@@ -7,7 +7,7 @@
 // An array of roles, where each role has children representing entities/modules
 // with specific permissions.
 
-import { IPermission } from "../models/Auth"; // Assuming you define this type
+import type { IPermission } from "../models/Auth"; // Assuming you define this type
 
 interface RawRoleChild {
   title: string; // The entity name, e.g., "PharmacyProduct"

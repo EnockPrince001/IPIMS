@@ -21,7 +21,7 @@ const DashboardOverview: React.FC = () => {
       </Typography>
 
       <Grid container spacing={3}>
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           {/* TODO: Implement DashboardCard component with actual data */}
           {/* <DashboardCard title="Sales Today" value={`KSh ${salesToday.toLocaleString()}`} icon="AttachMoneyIcon" /> */}
           <Box sx={{ p: 2, border: '1px dashed grey' }}>
@@ -29,13 +29,13 @@ const DashboardOverview: React.FC = () => {
             <Typography variant="body2">Placeholder Card</Typography>
           </Box>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <Box sx={{ p: 2, border: '1px dashed grey' }}>
             <Typography variant="h6">Pending Prescriptions: {pendingPrescriptions}</Typography>
             <Typography variant="body2">Placeholder Card</Typography>
           </Box>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <Box sx={{ p: 2, border: '1px dashed grey' }}>
             <Typography variant="h6">Low Stock Items: {lowStockItems}</Typography>
             <Typography variant="body2">Placeholder Card</Typography>

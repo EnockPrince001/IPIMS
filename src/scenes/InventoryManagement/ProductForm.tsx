@@ -3,7 +3,7 @@ import React from 'react';
 import { TextField, Switch, FormControlLabel, MenuItem, Box } from '@mui/material';
 import { FormikForm } from '../../components/common'; // Assuming FormikForm component
 import * as Yup from 'yup';
-import { IPharmacyProduct, ISupplier, IDrugClassification } from '../../data/models'; // Assuming models
+import type { IPharmacyProduct, ISupplier, IDrugClassification } from '../../data/models'; // Assuming models
 import { inventoryService } from '../../services';
 
 interface ProductFormProps {

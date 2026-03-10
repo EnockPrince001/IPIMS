@@ -2,6 +2,7 @@
 import React from 'react';
 import { Sidebar as ProSidebar, Menu, MenuItem, SubMenu, useProSidebar } from 'react-pro-sidebar';
 import { Box, Typography, useTheme, IconButton } from '@mui/material';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
@@ -66,11 +67,11 @@ const Sidebar: React.FC = () => {
         borderRight: `1px solid ${theme.palette.divider}`,
       }}
     >
-      <Menu iconShape="square">
+      <Menu >
         {/* LOGO AND MENU ICON */}
         <MenuItem
           onClick={() => collapseSidebar()}
-          icon={collapsed ? <MenuIcon /> : undefined}
+          icon={collapsed ? <MenuOutlinedIcon /> : undefined}
           style={{
             margin: '10px 0 20px 0',
             color: theme.palette.text.primary,
@@ -87,7 +88,7 @@ const Sidebar: React.FC = () => {
                 IPIMS
               </Typography>
               <IconButton onClick={() => collapseSidebar()}>
-                <MenuIcon />
+                <MenuOutlinedIcon />
               </IconButton>
             </Box>
           )}

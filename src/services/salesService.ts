@@ -3,7 +3,8 @@
 
 import { salesClient } from '../config';
 import { gql } from '@apollo/client';
-import { ISaleOrder, IPayment } from '../data/models';
+import type { ISaleOrder } from '../data/models';
+import type { IPayment } from '../data/models';
 
 // TODO: Define your GraphQL queries and mutations for sales
 const GET_SALE_ORDERS_QUERY = gql`
@@ -34,7 +35,7 @@ class SalesService {
   public async getSaleOrders(): Promise<ISaleOrder[]> {
     // TODO: Implement fetching logic
     try {
-      const { data } = await salesClient.query({
+      const { data } = await salesClient.query<any>({
         query: GET_SALE_ORDERS_QUERY,
         fetchPolicy: 'network-only',
       });
@@ -48,7 +49,7 @@ class SalesService {
   public async createSaleOrder(order: Partial<ISaleOrder>): Promise<ISaleOrder> {
     // TODO: Implement creation logic
     try {
-      const { data } = await salesClient.mutate({
+      const { data } = await salesClient.mutate<any>({
         mutation: CREATE_SALE_ORDER_MUTATION,
         variables: { input: order },
       });

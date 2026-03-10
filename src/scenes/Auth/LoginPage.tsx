@@ -1,89 +1,56 @@
 // src/scenes/Auth/LoginPage.tsx
-import React, { useState } from 'react';
-import { Box, Typography, TextField, Button, Paper, CircularProgress, Link } from '@mui/material';
-import { useAuth } from '../../hooks/useAuth';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SignIn } from '@clerk/react';
+import './LoginPage.css';
 
 const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState('pharmacist'); // Default for testing
-  const [password, setPassword] = useState('password');   // Default for testing
-  const [error, setError] = useState('');
-  const { login, loading } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setError('');
-    const success = await login(username, password);
-    if (success) {
-      navigate('/dashboard'); // Redirect to dashboard on successful login
-    } else {
-      setError('Invalid username or password.');
-    }
-  };
-
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-        bgcolor: 'background.default',
-      }}
-    >
-      <Paper elevation={6} sx={{ p: 4, maxWidth: 400, width: '100%', borderRadius: 2 }}>
-        <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
-          IPIMS Pharmacy POS
-        </Typography>
-        <Typography variant="h6" component="h2" gutterBottom align="center">
-          Login
-        </Typography>
-        {error && (
-          <Typography color="error" variant="body2" align="center" sx={{ mb: 2 }}>
-            {error}
-          </Typography>
-        )}
-        <form onSubmit={handleSubmit}>
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            autoFocus
-          />
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            disabled={loading}
-            startIcon={loading ? <CircularProgress size={20} color="inherit" /> : null}
-          >
-            {loading ? 'Logging In...' : 'Sign In'}
-          </Button>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-            <Link href="#" variant="body2">
-              Forgot password?
-            </Link>
-            <Link href="#" variant="body2">
-              Don't have an account? Sign Up
-            </Link>
-          </Box>
-        </form>
-      </Paper>
-    </Box>
+    <div className="login-page">
+      <button className="back" onClick={() => navigate('/')}>
+        ← Back to Home
+      </button>
+      <div className="clerk-signin-wrapper">
+        <SignIn
+          signUpUrl="/signup"
+          forceRedirectUrl="/dashboard"
+          appearance={{
+            elements: {
+              rootBox: {
+                width: '100%',
+                maxWidth: '460px',
+              },
+              card: {
+                borderRadius: '24px',
+                boxShadow: '0 24px 80px rgba(26, 58, 42, 0.11), 0 4px 16px rgba(0, 0, 0, 0.05)',
+              },
+              headerTitle: {
+                fontFamily: "'Playfair Display', serif",
+                fontWeight: 800,
+              },
+              formButtonPrimary: {
+                background: 'linear-gradient(135deg, #2d6a4f, #40916c)',
+                borderRadius: '10px',
+                fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 600,
+                fontSize: '1rem',
+                padding: '15px',
+                boxShadow: '0 4px 16px rgba(45, 106, 79, 0.28)',
+                transition: 'all 0.25s',
+              },
+              formFieldInput: {
+                borderRadius: '10px',
+                border: '1.5px solid #cde3d6',
+                fontFamily: "'DM Sans', sans-serif",
+                background: '#f8fcfa',
+              },
+            },
+          }}
+        />
+      </div>
+    </div>
   );
 };
 

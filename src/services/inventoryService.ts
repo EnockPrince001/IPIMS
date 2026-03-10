@@ -3,7 +3,9 @@
 
 import { inventoryClient } from '../config';
 import { gql } from '@apollo/client';
-import { IPharmacyProduct, ISupplier, IDrugClassification } from '../data/models';
+import type { IPharmacyProduct } from '../data/models';
+import type { ISupplier } from '../data/models';
+import type { IDrugClassification } from '../data/models';
 
 // TODO: Define your GraphQL queries and mutations for inventory
 const GET_PHARMACY_PRODUCTS_QUERY = gql`
@@ -36,7 +38,7 @@ class InventoryService {
   public async getPharmacyProducts(): Promise<IPharmacyProduct[]> {
     // TODO: Implement fetching logic
     try {
-      const { data } = await inventoryClient.query({
+      const { data } = await inventoryClient.query<any>({
         query: GET_PHARMACY_PRODUCTS_QUERY,
         fetchPolicy: 'network-only',
       });
@@ -50,7 +52,7 @@ class InventoryService {
   public async createPharmacyProduct(product: Partial<IPharmacyProduct>): Promise<IPharmacyProduct> {
     // TODO: Implement creation logic
     try {
-      const { data } = await inventoryClient.mutate({
+      const { data } = await inventoryClient.mutate<any>({
         mutation: CREATE_PHARMACY_PRODUCT_MUTATION,
         variables: { input: product },
       });

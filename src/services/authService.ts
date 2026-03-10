@@ -1,7 +1,9 @@
 // src/services/authService.ts
 // This service handles authentication-related API calls (login, logout, refresh token)
 
-import { IAuthTokens, IUser, IPermission } from '../data/models';
+import type { IAuthTokens } from '../data/models';
+import type { IUser } from '../data/models';
+import type { IPermission } from '../data/models';
 import { pharmacistPermissions } from '../data/mockData';
 
 // This service is mocked for MVP purposes.

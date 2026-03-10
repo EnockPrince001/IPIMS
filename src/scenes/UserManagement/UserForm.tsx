@@ -3,7 +3,8 @@ import React from 'react';
 import { TextField, Box, MenuItem } from '@mui/material';
 import { FormikForm } from '../../components/common';
 import * as Yup from 'yup';
-import { IUser, IRole } from '../../data/models';
+import type { IUser } from '../../data/models';
+import type { IRole } from '../../data/models';
 import { userService } from '../../services';
 
 interface UserFormProps {

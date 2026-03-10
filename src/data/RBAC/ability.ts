@@ -1,16 +1,15 @@
 // src/data/RBAC/ability.ts
-import { AbilityBuilder, Ability, AbilityClass } from '@casl/ability';
+import { AbilityBuilder, Ability } from '@casl/ability';
 import { createContext, useContext } from 'react';
-import { IPermission } from '../models/Auth'; // Assuming you define this type
+import type { IPermission } from '../models/Auth'; // Assuming you define this type
 
 type Actions = 'manage' | 'create' | 'read' | 'update' | 'delete' | 'activate' | 'export' | string;
 type Subjects = 'all' | 'User' | 'Role' | 'PharmacyProduct' | 'Patient' | 'Prescription' | 'SaleOrder' | string;
 
 export type AppAbility = Ability<[Actions, Subjects]>;
-export const AppAbility = Ability as AbilityClass<AppAbility>;
 
 // Initialize with a default ability (e.g., for unauthenticated users)
-export const initialAbility = new AppAbility([], {
+export const initialAbility = new Ability<[Actions, Subjects]>([], {
   detectSubjectType: (object: any) => {
     // TODO: Implement logic to detect subject type based on object properties
     // For example, if (object.hasOwnProperty('drugId')) return 'PharmacyProduct';
@@ -24,7 +23,7 @@ export const useAbility = () => useContext(AbilityContext);
 
 // Function to define abilities based on fetched user permissions
 export function defineAbilitiesFor(userPermissions: IPermission[]): AppAbility {
-  const { can, cannot, build } = new AbilityBuilder<AppAbility>(AppAbility);
+  const { can, cannot, build } = new AbilityBuilder<AppAbility>(Ability);
 
   if (userPermissions && userPermissions.length > 0) {
     userPermissions.forEach((perm) => {

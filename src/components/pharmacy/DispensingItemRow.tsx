@@ -2,7 +2,7 @@
 import React from 'react';
 import { Box, TextField, IconButton, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { IPharmacyProduct } from '../../data/models'; // Assuming product model
+import type { IPharmacyProduct } from '../../data/models'; // Assuming product model
 
 interface DispensingItemRowProps {
   item: {

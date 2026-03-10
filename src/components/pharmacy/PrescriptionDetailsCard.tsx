@@ -1,7 +1,7 @@
 // src/components/pharmacy/PrescriptionDetailsCard.tsx
 import React from 'react';
 import { Card, CardContent, Typography, Box, Divider } from '@mui/material';
-import { IPrescription } from '../../data/models'; // Assuming Prescription model
+import type { IPrescription } from '../../data/models'; // Assuming Prescription model
 
 interface PrescriptionDetailsCardProps {
   prescription: IPrescription;

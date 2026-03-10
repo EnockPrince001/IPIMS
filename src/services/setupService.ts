@@ -3,8 +3,8 @@
 
 import { setupClient } from '../config';
 import { gql } from '@apollo/client';
-import { IPaymentMethod } from '../data/models';
-import { PharmacyConfigState } from '../store/reducers/pharmacyConfigReducer';
+import type { IPaymentMethod } from '../data/models';
+import type { PharmacyConfigState } from '../store/reducers/pharmacyConfigReducer';
 
 // TODO: Define your GraphQL queries and mutations for setup
 const GET_PAYMENT_METHODS_QUERY = gql`
@@ -36,7 +36,7 @@ class SetupService {
   public async getPaymentMethods(): Promise<IPaymentMethod[]> {
     // TODO: Implement fetching logic
     try {
-      const { data } = await setupClient.query({
+      const { data } = await setupClient.query<any>({
         query: GET_PAYMENT_METHODS_QUERY,
         fetchPolicy: 'network-only',
       });
@@ -50,7 +50,7 @@ class SetupService {
   public async getPharmacyConfig(): Promise<PharmacyConfigState> {
     // TODO: Implement fetching logic
     try {
-      const { data } = await setupClient.query({
+      const { data } = await setupClient.query<any>({
         query: GET_PHARMACY_CONFIG_QUERY,
         fetchPolicy: 'network-only',
       });

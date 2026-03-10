@@ -1,9 +1,9 @@
 // src/scenes/RoleManagement/RolesTable.tsx
 import React, { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
-import { GridColDef } from '@mui/x-data-grid';
+import type { GridColDef } from '@mui/x-data-grid';
 import GenericDataGrid from '../../components/common/GenericDataGrid';
-import { IRole } from '../../data/models';
+import type { IRole } from '../../data/models';
 import { userService } from '../../services';
 import RoleForm from './RoleForm'; // Assuming a form for roles
 

@@ -1,9 +1,9 @@
 // src/scenes/InventoryManagement/ProductsTable.tsx
 import React, { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
-import { GridColDef } from '@mui/x-data-grid';
+import type { GridColDef } from '@mui/x-data-grid';
 import GenericDataGrid from '../../components/common/GenericDataGrid';
-import { IPharmacyProduct } from '../../data/models';
+import type { IPharmacyProduct } from '../../data/models';
 import { inventoryService } from '../../services';
 import ProductForm from './ProductForm'; // Assuming a form for products
 

@@ -1,7 +1,7 @@
 // src/components/common/DashboardCard/index.tsx
 import React from 'react';
 import { Card, CardContent, Typography, Box } from '@mui/material';
-import { IconProps } from '@mui/material/Icon';
+import type { IconProps } from '@mui/material/Icon';
 
 interface DashboardCardProps {
   title: string;

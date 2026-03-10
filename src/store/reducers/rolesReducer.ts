@@ -1,5 +1,6 @@
 // src/store/reducers/rolesReducer.ts
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { Ability } from '@casl/ability';
 import { initialAbility } from '../../data/RBAC/ability'; // Import initial ability
 

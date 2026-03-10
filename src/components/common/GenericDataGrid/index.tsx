@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { Box, Typography, Paper, Button, IconButton, Toolbar, Tooltip, TextField, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
-import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
+import type { GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { useAbility } from '../../../data/RBAC/ability'; // Import useAbility hook
 
 // Define common props for actions

@@ -3,10 +3,11 @@ import { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../services';
-import { AppDispatch } from '../store';
+import type { AppDispatch } from '../store';
 import { setUserRoles, setAbility } from '../store/reducers/rolesReducer';
 import { defineAbilitiesFor } from '../data/RBAC/ability';
-import { IUser, IPermission } from '../data/models';
+import type { IUser } from '../data/models';
+import type { IPermission } from '../data/models';
 
 interface AuthHook {
   isAuthenticated: boolean;

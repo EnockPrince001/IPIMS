@@ -3,7 +3,7 @@ import React from 'react';
 import { TextField, Box } from '@mui/material';
 import { FormikForm } from '../../components/common';
 import * as Yup from 'yup';
-import { IPatient } from '../../data/models';
+import type { IPatient } from '../../data/models';
 import { patientService } from '../../services';
 
 interface PatientFormProps {

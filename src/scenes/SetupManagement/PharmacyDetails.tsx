@@ -1,9 +1,10 @@
 // src/scenes/SetupManagement/PharmacyDetails.tsx
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, TextField, Button, CircularProgress, Alert } from '@mui/material';
+import { Box, Typography, TextField, Button, CircularProgress, Alert, Paper } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../store';
-import { fetchPharmacyConfig, updateTaxRate } from '../../store/reducers/pharmacyConfigReducer'; // Use reducer actions
+import type { RootState } from '../../store';
+import type { AppDispatch } from '../../store';
+import { fetchPharmacyConfigStart, updateTaxRate } from '../../store/reducers/pharmacyConfigReducer'; // Use reducer actions
 import { setupService } from '../../services'; // For saving changes
 
 const PharmacyDetails: React.FC = () => {
@@ -60,7 +61,7 @@ const PharmacyDetails: React.FC = () => {
           value={pharmacyName}
           margin="normal"
           InputProps={{ readOnly: !editMode }}
-          // TODO: Add onChange handler if editable
+        // TODO: Add onChange handler if editable
         />
         <TextField
           label="Address"

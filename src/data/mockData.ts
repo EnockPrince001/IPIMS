@@ -1,5 +1,5 @@
 // src/data/mockData.ts
-import { IPharmacyProduct, IPatient, IPermission } from './models';
+import type { IPharmacyProduct, IPatient, IPermission } from './models';
 
 // --- Mock Pharmacy Products ---
 export const mockProducts: IPharmacyProduct[] = [

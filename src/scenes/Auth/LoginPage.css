@@ -1,0 +1,306 @@
+/* ===== LOGIN PAGE – scoped under .login-page ===== */
+.login-page {
+    --gd: #1a3a2a;
+    --gm: #2d6a4f;
+    --ga: #40916c;
+    --gb: #52b788;
+    --gl: #b7e4c7;
+    --w: #ffffff;
+    --td: #0d2218;
+    --tm: #2d4a3a;
+    --tmuted: #6b8f7a;
+
+    background: #edf4f0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.login-page::before {
+    content: '';
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(64, 145, 108, 0.11), transparent 70%);
+    top: -200px;
+    right: -200px;
+}
+
+.login-page::after {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(45, 106, 79, 0.07), transparent 70%);
+    bottom: -150px;
+    left: -150px;
+}
+
+.login-page .lcard {
+    background: var(--w);
+    border-radius: 24px;
+    padding: 52px 48px;
+    width: 100%;
+    max-width: 460px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 24px 80px rgba(26, 58, 42, 0.11), 0 4px 16px rgba(0, 0, 0, 0.05);
+    animation: login-fadeUp 0.5s ease both;
+}
+
+.login-page .llogo {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.login-page .lmark {
+    width: 68px;
+    height: 68px;
+    background: linear-gradient(135deg, var(--gm), var(--ga));
+    border-radius: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 12px;
+    box-shadow: 0 8px 24px rgba(45, 106, 79, 0.28);
+}
+
+.login-page .ltext {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--td);
+}
+
+.login-page .ltext .ip {
+    color: var(--ga);
+}
+
+.login-page .lsub {
+    font-size: 0.72rem;
+    color: var(--tmuted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+.login-page .lh {
+    text-align: center;
+    margin-bottom: 8px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--td);
+}
+
+.login-page .lh .ip {
+    color: var(--ga);
+}
+
+.login-page .lh .ims {
+    color: var(--gm);
+}
+
+.login-page .lst {
+    text-align: center;
+    color: var(--tmuted);
+    font-size: 0.9rem;
+    margin-bottom: 36px;
+}
+
+.login-page .fg {
+    margin-bottom: 18px;
+}
+
+.login-page .fi2 {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid #cde3d6;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    color: var(--td);
+    background: #f8fcfa;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.login-page .fi2::placeholder {
+    color: #9db8a9;
+}
+
+.login-page .fi2:focus {
+    border-color: var(--ga);
+    background: var(--w);
+    box-shadow: 0 0 0 3px rgba(64, 145, 108, 0.1);
+}
+
+.login-page .frow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.login-page .rem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    color: var(--tm);
+    cursor: pointer;
+}
+
+.login-page .rem input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--ga);
+    cursor: pointer;
+}
+
+.login-page .fl {
+    font-size: 0.88rem;
+    color: var(--ga);
+    text-decoration: none;
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.login-page .fl:hover {
+    text-decoration: underline;
+}
+
+.login-page .btn-login {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--gm), var(--ga));
+    border: none;
+    border-radius: 10px;
+    color: var(--w);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 4px 16px rgba(45, 106, 79, 0.28);
+}
+
+.login-page .btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(45, 106, 79, 0.38);
+}
+
+.login-page .btn-login:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.login-page .lft {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 0.88rem;
+    color: var(--tmuted);
+}
+
+.login-page .lft a {
+    color: var(--ga);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-page .lft a:hover {
+    text-decoration: underline;
+}
+
+.login-page .back {
+    position: absolute;
+    top: 32px;
+    left: 40px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--tm);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    transition: color 0.2s;
+}
+
+.login-page .back:hover {
+    color: var(--ga);
+}
+
+.login-page .error-msg {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.login-page .loading-spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: login-spin 0.6s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+@keyframes login-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes login-fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Clerk SignIn component container styling */
+.login-page .clerk-signin-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 900px) {
+    .login-page .lcard {
+        padding: 36px 24px;
+        margin: 0 16px;
+    }
+
+    .login-page .back {
+        top: 16px;
+        left: 16px;
+    }
+}
